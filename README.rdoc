@@ -21,8 +21,8 @@
 
 9) author show >>>
 
-<table  border="1"><tbody>
-<% @author.thesis.each do |thesis| %>
+	<table border="1"><tbody>
+	<% @author.thesis.each do |thesis| %>
       <tr>
         <td><%= thesis.title %></td>
         <td><%= thesis.abstract %></td>
