@@ -1,34 +1,38 @@
-== MI-RUB hw
+== MI-RUB hw CO STACI UDELAT ABY TO FUNGOVALO :D
 
-Do aplikace přidejte model reperezentující osobu (Person). Osoba má username, jméno a příjmení.
+1) bundle install
 
-Přidejte vazbu osoby na práci v databázi a v modelu Thesis. Osoba může být autorem jedné nebo více prací a práce má právě jednoho nebo žádného autora.
+2) rails g scaffold author username:string firstname:string surname:string
 
-Upravte formulář pro tvorbu/editaci práce tak, aby bylo možné nastavit a uložit autora.
+3) rails g migration AddAuthorIdToTheses author_id:integer
 
-Hotovou aplikaci deployněte na Heroku. Mailem mi prosím pošlete odkaz na běžící aplikaci a na vaše repo na Githubu.
+4) rake db:migrate
 
-soubory co zmenit (napoveda):
-- config/coutes.rb (to se udela scafoldem)
-- provedl jsem migraci (copypaste ze scafoldu)
-- models/thesis.rb - musime u praci rict, ze patri autorovi
-- ve views thesis je _form a tam se to musi upravit (bude to uplne stejny jako v pripade faculty)
-- theses/index aby se to ukazovalo i v listingu
+5) thesis.rb >>> belongs_to :author, inverse_of: :thesis
 
+6) author.rb >>> has_many :thesis, inverse_of: :author
 
-thesis.author.try!(:firstname)
+7) thesis/form >>> <div class="field">
+    <%= f.label :author %><br>
+    <%= f.select :author_id, Author.all.collect { |f| [f.username, f.id] }, include_blank: true %>
+  </div>
 
-- jeste je potreba upravit controllery
+8) thesis controller: add ":author_id" to params.require(:thesis).permit
 
-rails g scaffold people username:string first_name:string last_name:string
+9) author show >>>
 
-rails generate migration index_person_on_author_id ue_id:integer
-
-rails generate model Person username:string first_name:string last_name:string person_id:references
-
-thole mi zatim nejde:
-rails generate model Person username:string first_name:string last_name:string person:references
-
+<table  border="1"><tbody>
+<% @author.thesis.each do |thesis| %>
+      <tr>
+        <td><%= thesis.title %></td>
+        <td><%= thesis.abstract %></td>
+        <td><%= thesis.defended %></td>
+        <td><%= link_to 'Show', thesis %></td>
+        <td><%= link_to 'Edit', edit_thesis_path(thesis) %></td>
+        <td><%= link_to 'Destroy', thesis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody></table>
 
 == README
 

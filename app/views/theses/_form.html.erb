@@ -27,6 +27,10 @@
     <%= f.label :faculty %><br>
     <%= f.select :faculty_id, Faculty.all.collect { |f| [f.name, f.id] }, include_blank: true %>
   </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.select :author_id, Author.all.collect { |f| [f.username, f.id] }, include_blank: true %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

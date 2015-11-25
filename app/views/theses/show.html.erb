@@ -6,6 +6,13 @@
 </p>
 
 <p>
+  <strong>Author:</strong>
+  Username: <%= @thesis.author.try!(:username) %><br>
+  First name: <%= @thesis.author.try!(:firstname) %><br>
+  Last name: <%= @thesis.author.try!(:surname) %>
+</p>
+
+<p>
   <strong>Abstract:</strong>
   <%= @thesis.abstract %>
 </p>
