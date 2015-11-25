@@ -12,10 +12,12 @@
 
 6) author.rb >>> has_many :thesis, inverse_of: :author
 
-7) thesis/form >>> <div class="field">
-    <%= f.label :author %><br>
-    <%= f.select :author_id, Author.all.collect { |f| [f.username, f.id] }, include_blank: true %>
-  </div>
+7) thesis/form >>>
+
+    <div class="field">
+        <%= f.label :author %><br>
+        <%= f.select :author_id, Author.all.collect { |f| [f.username, f.id] }, include_blank: true %>
+    </div>
 
 8) thesis controller: add ":author_id" to params.require(:thesis).permit
 
