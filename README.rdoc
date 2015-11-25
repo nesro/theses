@@ -1,3 +1,35 @@
+== MI-RUB hw
+
+Do aplikace přidejte model reperezentující osobu (Person). Osoba má username, jméno a příjmení.
+
+Přidejte vazbu osoby na práci v databázi a v modelu Thesis. Osoba může být autorem jedné nebo více prací a práce má právě jednoho nebo žádného autora.
+
+Upravte formulář pro tvorbu/editaci práce tak, aby bylo možné nastavit a uložit autora.
+
+Hotovou aplikaci deployněte na Heroku. Mailem mi prosím pošlete odkaz na běžící aplikaci a na vaše repo na Githubu.
+
+soubory co zmenit (napoveda):
+- config/coutes.rb (to se udela scafoldem)
+- provedl jsem migraci (copypaste ze scafoldu)
+- models/thesis.rb - musime u praci rict, ze patri autorovi
+- ve views thesis je _form a tam se to musi upravit (bude to uplne stejny jako v pripade faculty)
+- theses/index aby se to ukazovalo i v listingu
+
+
+thesis.author.try!(:firstname)
+
+- jeste je potreba upravit controllery
+
+rails g scaffold people username:string first_name:string last_name:string
+
+rails generate migration index_person_on_author_id ue_id:integer
+
+rails generate model Person username:string first_name:string last_name:string person_id:references
+
+thole mi zatim nejde:
+rails generate model Person username:string first_name:string last_name:string person:references
+
+
 == README
 
 This README would normally document whatever steps are necessary to get the
